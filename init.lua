@@ -76,8 +76,10 @@ function glue(c1, c2)
         temp_glued_windows2 = glued_clients[index2]
     end
         
+    c1.minimized = false
+    capi.client.focus = c1
     for k,v in pairs(temp_glued_windows1) do 
-        v.minimized = true
+        if (v ~= c1) then v.minimized = true end
         table.insert(result, v)
     end
     for k,v in pairs(temp_glued_windows2) do 
@@ -85,7 +87,6 @@ function glue(c1, c2)
         table.insert(result, v)
     end
     
-    c1.minimized = false
     if index2 ~= nil then
         glued_clients[index2] = nil
     end
