@@ -96,6 +96,20 @@ function glue(c1, c2)
     end
     debug_print_all_glued_lists()
 end
+
+-- unglue client
+function unglue(c)
+    local glued_list = glued_clients[get_list_index_by_client (c)]
+    local next_client = get_next_client_in_list(glued_list)
+    next_client.minimized = false
+    -- remove client from glued_list
+    for k, cur_client in pairs(glued_list) do
+        if cur_client == c then
+            glued_list[k] = nil
+        end
+    end
+    debug_print_all_glued_lists()
+end
  
 -- get the next client in the gluent list
 function get_next_client_in_list(glued_list)
